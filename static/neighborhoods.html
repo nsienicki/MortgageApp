@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neighborhoods · Homebuyer Market Lens</title>
+  <meta name="description" content="Home values, price changes and estimated payments for every ZIP code and neighborhood in a metro.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f9f9f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Homebuyer Market Lens">
+  <meta property="og:title" content="Neighborhoods · Homebuyer Market Lens">
+  <meta property="og:description" content="Home values, price changes and estimated payments for every ZIP code and neighborhood in a metro.">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-row">
+    <div>
+      <h1>Homebuyer Market Lens</h1>
+      <p class="lede">Home values and trends for every ZIP code and neighborhood in a metro.</p>
+    </div>
+    <nav class="site-nav" aria-label="Pages">
+      <a href="/">Dashboard</a>
+      <a href="/neighborhoods" aria-current="page">Neighborhoods</a>
+      <a href="/compare">Compare</a>
+      <a href="/discussion">Discussion</a>
+      <a href="/data">Data</a>
+    </nav>
+  </div>
+</header>
+
+<div class="filters" role="search">
+  <div class="wrap filter-row">
+    <label class="field metro-field">
+      <span>Metro area</span>
+      <input id="metro-input" list="metro-list" autocomplete="off" placeholder="Search a metro, e.g. Denver, CO">
+      <datalist id="metro-list"></datalist>
+    </label>
+    <div class="field">
+      <span id="type-label">Show</span>
+      <div class="segmented" role="radiogroup" aria-labelledby="type-label">
+        <button type="button" data-type="zip" role="radio">ZIP codes</button>
+        <button type="button" data-type="neighborhood" role="radio">Neighborhoods</button>
+      </div>
+    </div>
+    <label class="field">
+      <span>Monthly budget</span>
+      <input id="budget-input" type="number" min="0" step="100" inputmode="numeric" placeholder="e.g. 3000" class="budget">
+    </label>
+    <label class="field">
+      <span>Down payment</span>
+      <select id="down-input">
+        <option value="0.035">3.5% (FHA)</option>
+        <option value="0.10" selected>10%</option>
+        <option value="0.20">20%</option>
+      </select>
+    </label>
+    <label class="field checkbox">
+      <input type="checkbox" id="taxes-input" checked>
+      <span>Include taxes &amp; insurance<br><small>est. 1.5% of value per year</small></span>
+    </label>
+  </div>
+</div>
+
+<main class="wrap">
+  <section class="card empty-state" id="empty-state" hidden>
+    <h2>Choose a metro</h2>
+    <p class="note">Search above, or start with one of the largest metros.</p>
+    <div class="suggestions" id="suggestions"></div>
+  </section>
+
+  <div id="content" hidden>
+    <div class="title-row">
+      <h2 class="metro-title" id="title"></h2>
+      <a class="button" id="dashboard-link" href="/">Metro dashboard</a>
+    </div>
+    <p class="note" id="intro"></p>
+    <p class="note" id="type-note"></p>
+
+    <section class="tiles wide" id="tiles" aria-label="Key numbers"></section>
+
+    <div class="grid section-gap">
+      <figure class="card" data-chart="n-dist">
+        <figcaption><strong>How prices changed across the metro</strong><span id="dist-sub">Number of areas by change in typical home value over the past year</span><a class="about-link" href="/discussion#neighborhood-spread">About this measure</a></figcaption>
+        <div class="plot"><canvas></canvas></div>
+        <details><summary>Data table</summary><div class="table-wrap"></div></details>
+      </figure>
+      <figure class="card" data-chart="n-scatter">
+        <figcaption><strong>Home value vs. 5-year growth</strong><span id="scatter-sub">Each dot is one area. Are cheaper areas catching up?</span><a class="about-link" href="/discussion#catching-up">About this measure</a></figcaption>
+        <div class="legend" aria-hidden="true"></div>
+        <div class="plot"><canvas></canvas></div>
+        <p class="note">Values for every dot are in the table below.</p>
+      </figure>
+      <figure class="card span-2" data-chart="n-detail">
+        <figcaption><strong id="detail-title">Area history</strong><span id="detail-sub">Select a row in the table to see its history next to the metro's.</span></figcaption>
+        <div class="legend" aria-hidden="true"></div>
+        <div class="plot"><canvas></canvas></div>
+        <details><summary>Data table</summary><div class="table-wrap"></div></details>
+      </figure>
+    </div>
+
+    <section>
+      <div class="table-head">
+        <h3 class="section-title" id="table-title">All areas</h3>
+        <div class="toolbar">
+          <label class="field grow">
+            <span>Filter</span>
+            <input type="search" id="area-filter" placeholder="ZIP, neighborhood or city" autocomplete="off">
+          </label>
+          <label class="field checkbox" id="budget-only-wrap" hidden>
+            <input type="checkbox" id="budget-only">
+            <span>Only areas within budget</span>
+          </label>
+          <button type="button" class="button" id="csv-button">Download CSV</button>
+        </div>
+      </div>
+      <div class="card table-card">
+        <div class="table-wrap area-wrap">
+          <table class="area-table" id="area-table"></table>
+        </div>
+      </div>
+      <div class="pager">
+        <span class="note" id="table-info"></span>
+        <button type="button" id="show-all" hidden>Show all</button>
+      </div>
+      <p class="note">Typical home values are Zillow estimates for the middle third of homes in each area. Each trend line uses its own scale. Payments use this month's average 30-year rate; they're estimates, not quotes.</p>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <section>
+      <h3>Sources</h3>
+      <ul class="sources">
+        <li>Home values: <a href="https://www.zillow.com/research/data/">Zillow Home Value Index (ZHVI)</a>, Zillow Group</li>
+        <li>Listings, sales and days on market: <a href="https://www.redfin.com/news/data-center/">Redfin</a>, a national real estate brokerage</li>
+        <li>Same-home prices: <a href="https://www.fhfa.gov/data/hpi">FHFA House Price Index</a>, Federal Housing Finance Agency</li>
+        <li>Mortgage rates: <a href="https://www.freddiemac.com/pmms">Freddie Mac Primary Mortgage Market Survey</a>, via <a href="https://fred.stlouisfed.org/series/MORTGAGE30US">FRED</a>, Federal Reserve Bank of St. Louis</li>
+        <li>Household income: <a href="https://www.census.gov/">U.S. Census Bureau</a>, via <a href="https://fred.stlouisfed.org/series/MEHOINUSA646N">FRED</a></li>
+      </ul>
+      <p class="note"><a href="/data">See every dataset</a>, how we prepared it and what each column means.</p>
+    </section>
+    <section>
+      <h3>About</h3>
+      <p class="note">Homebuyer Market Lens is an independent project and isn't affiliated with Zillow, Redfin, the FHFA, Freddie Mac or the Census Bureau. Figures are estimates for general information. They aren't financial advice or a loan quote.</p>
+      <p class="note" id="freshness"></p>
+    </section>
+  </div>
+</footer>
+
+<script src="/static/common.js"></script>
+<script src="/static/neighborhoods.js"></script>
+<script src="/static/footer.js"></script>
+</body>
+</html>

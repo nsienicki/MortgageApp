@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Discussion · Homebuyer Market Lens</title>
+  <meta name="description" content="What each measure on Homebuyer Market Lens means, why it matters to buyers, how to read it, and where it can mislead.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f9f9f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Homebuyer Market Lens">
+  <meta property="og:title" content="Discussion · Homebuyer Market Lens">
+  <meta property="og:description" content="What each housing-market measure means, how to read it, and where it can mislead.">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-row">
+    <div>
+      <h1>Homebuyer Market Lens</h1>
+      <p class="lede">What each number means, why it matters when you're buying, and where it can mislead.</p>
+    </div>
+    <nav class="site-nav" aria-label="Pages">
+      <a href="/">Dashboard</a>
+      <a href="/neighborhoods">Neighborhoods</a>
+      <a href="/compare">Compare</a>
+      <a href="/discussion" aria-current="page">Discussion</a>
+      <a href="/data">Data</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap doc-layout">
+  <nav class="toc" aria-label="On this page">
+    <h2>On this page</h2>
+    <ol>
+      <li><a href="#start">Three questions</a></li>
+      <li><a href="#prices">Prices</a>
+        <ol>
+          <li><a href="#home-value">Typical home value</a></li>
+          <li><a href="#median-sale-price">Median sale price</a></li>
+          <li><a href="#price-per-sqft">Price per square foot</a></li>
+          <li><a href="#repeat-sales">Same-home price</a></li>
+        </ol>
+      </li>
+      <li><a href="#mix">Is it the homes or the mix?</a>
+        <ol>
+          <li><a href="#four-measures">Four measures</a></li>
+          <li><a href="#mix-gap">The mix gap</a></li>
+          <li><a href="#verdict">How we reach a verdict</a></li>
+          <li><a href="#segments">Segments</a></li>
+          <li><a href="#property-types">Property-type mix</a></li>
+          <li><a href="#shift-share">Value vs. mix, in dollars</a></li>
+          <li><a href="#mix-limits">Limits</a></li>
+        </ol>
+      </li>
+      <li><a href="#affordability">Affordability</a>
+        <ol>
+          <li><a href="#payment">Monthly payment</a></li>
+          <li><a href="#burden">Payment vs. income</a></li>
+          <li><a href="#rate">Mortgage rate</a></li>
+          <li><a href="#income">Household income</a></li>
+        </ol>
+      </li>
+      <li><a href="#competition">Competition</a>
+        <ol>
+          <li><a href="#days-on-market">Days on market</a></li>
+          <li><a href="#sale-to-list">Sale-to-list ratio</a></li>
+          <li><a href="#inventory">Homes for sale</a></li>
+          <li><a href="#price-cuts">Price cuts</a></li>
+        </ol>
+      </li>
+      <li><a href="#neighborhoods">ZIP codes &amp; neighborhoods</a>
+        <ol>
+          <li><a href="#neighborhood-spread">Spread of changes</a></li>
+          <li><a href="#catching-up">Catching up</a></li>
+          <li><a href="#budget">Budget</a></li>
+        </ol>
+      </li>
+      <li><a href="#comparing">Comparing metros</a></li>
+      <li><a href="#reading">Reading any housing data</a></li>
+    </ol>
+  </nav>
+
+  <article class="doc">
+    <section id="start">
+      <h2>Three questions</h2>
+      <p>Every chart on this site helps answer one of three questions a homebuyer asks:</p>
+      <ul>
+        <li><strong>What do homes cost, and is that changing?</strong> The <a href="#prices">price</a> measures, and whether a change reflects <a href="#mix">real value or a different mix of homes selling</a>.</li>
+        <li><strong>Can I afford one?</strong> The <a href="#affordability">affordability</a> measures turn prices and rates into a monthly payment and compare it with local incomes.</li>
+        <li><strong>How hard is it to win one?</strong> The <a href="#competition">competition</a> measures show how fast homes sell and how often buyers pay more than the asking price.</li>
+      </ul>
+      <p>No single number answers any of these on its own. The sections below explain what each one captures and what it misses.</p>
+    </section>
+
+    <section id="prices">
+      <h2>Prices</h2>
+      <p>"Home prices" can mean several different things. Each measure answers a slightly different question, and the differences between them are often the most informative part.</p>
+
+      <section id="home-value">
+        <h3>Typical home value</h3>
+        <p class="facts"><span>Zillow Home Value Index (ZHVI)</span><span>Monthly</span><span>Seasonally adjusted</span><span>Since 2000</span></p>
+        <p><strong>What it is.</strong> Zillow's estimate of what a typical home in the area is worth. It's built from estimated values of all homes, not just the ones that sold, and it focuses on the middle third of the market: homes valued between the 33rd and 67th percentiles.</p>
+        <p><strong>Why it matters.</strong> Because it values every home, not just the ones that sold, it isn't thrown off much by which homes sold in a given month. That makes it a steady read on the overall direction of values.</p>
+        <p><strong>How to read it.</strong> Look at the trend and compare it with the national line. A widening gap means the area is getting more expensive relative to the country.</p>
+        <p><strong>Limits.</strong> It's a model estimate, and it's smoothed. Turning points show up a month or two late, and estimates are weaker where few homes sell or homes are unusual.</p>
+      </section>
+
+      <section id="median-sale-price">
+        <h3>Median sale price</h3>
+        <p class="facts"><span>Redfin, from MLS data</span><span>Monthly</span><span>Not seasonally adjusted</span><span>Since 2012</span></p>
+        <p><strong>What it is.</strong> The middle price of the homes that actually sold that month: half sold for more, half for less.</p>
+        <p><strong>Why it matters.</strong> It's what buyers actually paid, and it's the number most often quoted in the news.</p>
+        <p><strong>How to read it.</strong> Compare a month with the same month a year earlier, not with last month. Prices rise each spring and dip each winter, and those seasonal swings aren't removed.</p>
+        <p><strong>Limits.</strong> It depends on <em>which</em> homes sold. If more condos or starter homes sell this spring than last, the median falls even if no home lost value. The <a href="#mix">mix analysis</a> exists because of this.</p>
+      </section>
+
+      <section id="price-per-sqft">
+        <h3>Price per square foot</h3>
+        <p class="facts"><span>Redfin, from MLS data</span><span>Monthly</span><span>Not seasonally adjusted</span></p>
+        <p><strong>What it is.</strong> The median of each sold home's price divided by its living area.</p>
+        <p><strong>Why it matters.</strong> It partly corrects for size, so a shift toward smaller homes moves it less than it moves the median sale price.</p>
+        <p><strong>Limits.</strong> It doesn't correct for location, condition or lot size. Smaller homes also tend to cost more per square foot, so a shift toward smaller homes can <em>raise</em> price per square foot while lowering the median. Treat it as a cross-check, not a verdict.</p>
+      </section>
+
+      <section id="repeat-sales">
+        <h3>Same-home price (repeat sales)</h3>
+        <p class="facts"><span>FHFA House Price Index</span><span>Quarterly</span><span>Not seasonally adjusted</span><span>Purchase prices only</span></p>
+        <p><strong>What it is.</strong> The Federal Housing Finance Agency tracks homes that have sold more than once and measures how much the <em>same house</em> went up or down between sales. We use FHFA's expanded-data version, which counts only purchase prices. It combines mortgages backed by Fannie Mae, Freddie Mac and the FHA with county sale records.</p>
+        <p><strong>Why it matters.</strong> It compares each house with itself, so the mix of homes selling can't move it. That makes it the closest thing to an answer to "what is a comparable home worth now?"</p>
+        <p><strong>Limits.</strong></p>
+        <ul>
+          <li>Newly built homes are left out until they sell a second time.</li>
+          <li>Renovations show up as price growth, since the index can't tell a new kitchen from a rising market.</li>
+          <li>It's published quarterly, about two months after each quarter ends, and recent quarters are revised as more sales are recorded.</li>
+        </ul>
+      </section>
+    </section>
+
+    <section id="mix">
+      <h2>Is it the homes or the mix?</h2>
+      <p>When a headline says "prices fell 5%," it usually means the <a href="#median-sale-price">median sale price</a> fell. That can happen in two very different ways:</p>
+      <ul>
+        <li><strong>A real decline in value:</strong> the same house would sell for less today than a year ago.</li>
+        <li><strong>A mix shift:</strong> values held, but a cheaper set of homes happened to sell. More condos, smaller homes or homes in less expensive neighborhoods made up a bigger share of sales.</li>
+      </ul>
+      <div class="example">
+        <p class="example-title">A simple example</p>
+        <p>A town has starter homes worth $300,000 and family homes worth $600,000, and neither changes in value all year. Last spring, 4 in 10 sales were starter homes, so the average sale was $480,000. This spring, 6 in 10 are starter homes, and the average sale is $420,000.</p>
+        <p>The headline says prices fell 12.5%. No home in town lost a dollar of value.</p>
+      </div>
+      <p>For a buyer the difference matters. A mix shift means the home you want costs about what it did a year ago. A real decline means it costs less, and might keep falling.</p>
+
+      <section id="four-measures">
+        <h3>Four measures, side by side</h3>
+        <p>The dashboard compares four measures of the change over the year. They differ in how much the mix of homes selling can move them:</p>
+        <div class="table-wrap card flush">
+          <table>
+            <thead><tr><th>Measure</th><th>Moved by the mix of homes selling?</th><th>Source</th></tr></thead>
+            <tbody>
+              <tr><td>Median sale price</td><td class="wrap-cell">Yes, fully</td><td>Redfin</td></tr>
+              <tr><td>Price per square foot</td><td class="wrap-cell">Partly: adjusts for size, not location or quality</td><td>Redfin</td></tr>
+              <tr><td>Zillow index</td><td class="wrap-cell">Little: values all homes, sold or not</td><td>Zillow</td></tr>
+              <tr><td>Same-home price</td><td class="wrap-cell">No: compares each house with itself</td><td>FHFA</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>When all four move together, the change is real. When the median moves on its own, the mix is doing the work.</p>
+        <p>We compare by quarter because the same-home index is quarterly. We compare each quarter with the same quarter a year earlier, which cancels out normal seasonal swings.</p>
+      </section>
+
+      <section id="mix-gap">
+        <h3>The mix gap</h3>
+        <p class="formula">Mix gap = median sale price change − same-home price change</p>
+        <p>Both changes are over the same year. The gap is in percentage points.</p>
+        <ul>
+          <li><strong>Below zero:</strong> the median did worse than comparable homes, so a cheaper mix of homes sold. The headline price understates what a comparable home costs.</li>
+          <li><strong>Above zero:</strong> a pricier mix sold, so the headline price overstates the rise. This is common when cheaper homes are scarce.</li>
+          <li><strong>Near zero:</strong> the median is a fair guide to how values moved.</li>
+        </ul>
+        <p>The comparison table on the dashboard includes each large metro's latest mix gap. You can sort by it to find places where the headline numbers mislead the most.</p>
+      </section>
+
+      <section id="verdict">
+        <h3>How we reach a verdict</h3>
+        <p>The summary at the top of the section applies two rules to the latest quarter with both sales and same-home data:</p>
+        <div class="table-wrap card flush">
+          <table>
+            <thead><tr><th>Same-home change</th><th>Mix gap within ±1.5 points</th><th>Mix gap beyond ±1.5 points</th></tr></thead>
+            <tbody>
+              <tr><td>Within ±1%</td><td class="wrap-cell">Stable</td><td class="wrap-cell">Mostly mix: cheaper (or pricier) homes are selling, while values held</td></tr>
+              <tr><td>Up 1% or more</td><td class="wrap-cell">A genuine rise in value</td><td class="wrap-cell">Both: values rose, and the mix moved the median further</td></tr>
+              <tr><td>Down 1% or more</td><td class="wrap-cell">A genuine decline in value</td><td class="wrap-cell">Both: values fell, and the mix moved the median further</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The thresholds are judgment calls. In a large metro, a quarter's median price can move a point or so from random variation in which homes sold. Smaller gaps aren't worth reading into. In small metros, random variation is larger, so treat a verdict there as a starting point.</p>
+      </section>
+
+      <section id="segments">
+        <h3>Value change by segment</h3>
+        <p class="facts"><span>Zillow Home Value Index</span><span>Monthly</span><span>Seasonally adjusted</span></p>
+        <p>Zillow publishes separate value indexes for lower-, middle- and higher-priced homes; for homes with 1 to 5+ bedrooms; and for single-family homes and condos. The chart shows how each changed over the past year.</p>
+        <ul>
+          <li><strong>Every segment down:</strong> the decline is broad and real.</li>
+          <li><strong>One segment down, others flat:</strong> that segment has its own story, such as condos weighed down by rising association fees or insurance costs.</li>
+          <li><strong>Segments flat while the median falls:</strong> a strong sign of mix.</li>
+        </ul>
+        <p>Each segment index is estimated separately, so small differences between them aren't meaningful.</p>
+      </section>
+
+      <section id="property-types">
+        <h3>Share of sales by property type</h3>
+        <p class="facts"><span>Redfin, from MLS data</span><span>Rolling three months</span></p>
+        <p>This chart shows what share of sales were single-family homes, townhouses, condos and small multi-unit buildings. Condos and townhouses usually cost less than single-family homes, so a rising share of them pulls the median down even when every type holds its value.</p>
+      </section>
+
+      <section id="shift-share">
+        <h3>Value vs. mix, in dollars</h3>
+        <p>To put a dollar figure on each effect, we use a standard method called shift-share analysis. First, we build a sales-weighted price from the four property types:</p>
+        <p class="formula">Price = Σ (type's share of sales × type's median price)</p>
+        <p>Then the change from a year earlier splits exactly into two parts:</p>
+        <p class="formula">Value effect = Σ last year's share × (this year's price − last year's price)</p>
+        <p class="formula">Mix effect = Σ (this year's share − last year's share) × this year's price</p>
+        <p>The <strong>value effect</strong> is how much prices would have changed if the same mix of property types had sold as last year. The <strong>mix effect</strong> is how much the change in that mix moved prices. The two add up to the total change.</p>
+        <p><strong>When the two views disagree.</strong> This method only captures the mix <em>between</em> property types. Mix can also shift <em>within</em> a type, for example toward smaller single-family homes or cheaper neighborhoods. You can tell when this is happening:</p>
+        <ul>
+          <li>the property-type split shows little mix effect, but the <a href="#mix-gap">mix gap</a> is large</li>
+          <li><a href="#price-per-sqft">price per square foot</a> and the same-home index are steady while the median falls</li>
+        </ul>
+        <p>The sales-weighted price is close to the overall median, but not identical. The dashboard shows both.</p>
+      </section>
+
+      <section id="mix-limits">
+        <h3>Limits of the mix analysis</h3>
+        <ul>
+          <li><strong>Timing.</strong> Sales data runs about three months behind, and the same-home index is quarterly. The analysis uses the latest quarter that has both, so it can describe a market several months ago.</li>
+          <li><strong>Area definitions.</strong> Sources draw metro boundaries slightly differently. For the largest metros, Redfin and FHFA report a core division (for example, the New York division rather than the whole tri-state metro), while Zillow covers the full metro.</li>
+          <li><strong>Sample size.</strong> With fewer than about 500 sales in a quarter, medians are noisy. The dashboard flags this.</li>
+          <li><strong>What the same-home index leaves out.</strong> It excludes new construction and counts renovations as price growth. In areas with a lot of new building, it can miss part of the market.</li>
+        </ul>
+      </section>
+    </section>
+
+    <section id="affordability">
+      <h2>Affordability</h2>
+
+      <section id="payment">
+        <h3>Monthly payment on the typical home</h3>
+        <p><strong>What it is.</strong> The monthly payment on a home at the <a href="#home-value">typical home value</a>, with a 30-year fixed mortgage at that month's average <a href="#rate">rate</a>.</p>
+        <p class="formula">Principal and interest = L × r ÷ (1 − (1 + r)<sup>−360</sup>)</p>
+        <p>Here L is the loan amount (price minus your down payment) and r is the annual rate divided by 12. If you include taxes and insurance, we add 1.5% of the home's value per year, a rough national average. Actual property taxes range from under 0.5% to over 2% depending on where you live.</p>
+        <p><strong>Not included.</strong> Mortgage insurance, which most loans require with less than 20% down. HOA fees. Closing costs. Points paid to lower the rate.</p>
+        <p><strong>How to read it.</strong> This chart shows how rates and prices combine. In 2022, payments jumped far more than prices did because rates roughly doubled.</p>
+      </section>
+
+      <section id="burden">
+        <h3>Payment as a share of income</h3>
+        <p><strong>What it is.</strong> The monthly payment divided by one-twelfth of the area's median household income.</p>
+        <p><strong>The 30% line.</strong> Housing costs above 30% of income are the federal government's long-standing definition of being "cost-burdened." It's a guideline, not a lending rule. Lenders look at your total debts, credit and savings.</p>
+        <p><strong>Limits.</strong></p>
+        <ul>
+          <li>Median income includes renters and owners alike, and people who buy homes typically earn more than the median, so this tends to overstate the burden for actual buyers.</li>
+          <li>Where metro-level income isn't available yet, we use the national median. That overstates the burden in higher-income metros and understates it in lower-income ones. The dashboard notes when this applies.</li>
+        </ul>
+      </section>
+
+      <section id="rate">
+        <h3>30-year fixed mortgage rate</h3>
+        <p class="facts"><span>Freddie Mac Primary Mortgage Market Survey</span><span>Weekly, averaged by month</span><span>National</span></p>
+        <p><strong>What it is.</strong> The average rate on 30-year fixed mortgages, based on loan applications submitted to Freddie Mac, for borrowers with strong credit putting 20% down.</p>
+        <p><strong>Limits.</strong> Your rate will differ with your credit score, down payment, loan type (FHA, VA and jumbo loans price differently), and any points you pay. Treat it as a benchmark for how the market has moved.</p>
+      </section>
+
+      <section id="income">
+        <h3>Median household income</h3>
+        <p class="facts"><span>U.S. Census Bureau</span><span>Annual</span><span>Not adjusted for inflation</span></p>
+        <p><strong>What it is.</strong> The income of the household in the middle, in that year's dollars. Nationally it comes from the Current Population Survey; for metros, from the American Community Survey where available.</p>
+        <p><strong>Limits.</strong> Income figures arrive about nine months after the year ends. For more recent months, we carry the latest year's figure forward.</p>
+      </section>
+    </section>
+
+    <section id="competition">
+      <h2>Competition</h2>
+      <p>These measures come from listings and sales on local multiple listing services (MLS), compiled by Redfin. None are seasonally adjusted, so spring markets always look hotter than winter ones. Compare each month with the same month a year earlier.</p>
+
+      <section id="days-on-market">
+        <h3>Median days on market</h3>
+        <p>Days from listing to an accepted offer for the typical home that went under contract. Fewer days means less time to decide, and a greater chance of competing offers.</p>
+      </section>
+
+      <section id="sale-to-list">
+        <h3>Sale-to-list ratio</h3>
+        <p>The average sale price divided by the final asking price. Above 100% means homes typically sell for more than asking, which usually means multiple offers. Below about 98% gives buyers more room to negotiate. The final asking price already reflects any price cuts, so this can understate how far prices came down from the original listing.</p>
+      </section>
+
+      <section id="inventory">
+        <h3>Homes for sale</h3>
+        <p>Active listings at the end of the month. More listings mean more choice and less pressure to bid up. The Data page also has <em>months of supply</em>, the time it would take to sell every listing at the current pace. Under about four months generally favors sellers; over about six favors buyers.</p>
+      </section>
+
+      <section id="price-cuts">
+        <h3>Listings with a price cut</h3>
+        <p>The share of active listings whose asking price was reduced. A rising share means sellers are pricing above what buyers will pay, often an early sign that a market is cooling.</p>
+      </section>
+    </section>
+
+    <section id="neighborhoods">
+      <h2>ZIP codes and neighborhoods</h2>
+      <p class="facts"><span>Zillow Home Value Index</span><span>Monthly</span><span>Seasonally adjusted</span><span>Model estimates</span></p>
+      <p>A metro's typical value is an average over very different places. The <a href="/neighborhoods">Neighborhoods</a> page breaks it down by ZIP code, and by neighborhood where Zillow defines them.</p>
+      <ul>
+        <li><strong>ZIP codes aren't neighborhoods.</strong> They're postal routes. One ZIP can span very different streets, and cross city or school-district lines.</li>
+        <li><strong>Neighborhoods</strong> use Zillow's boundaries and mostly cover larger cities. Names can repeat within a metro (many cities have a "Downtown"), so check the city column.</li>
+        <li><strong>These are estimates, not sale prices.</strong> Zillow models every home's value, which keeps small areas from swinging with each sale. But estimates are less certain where few homes sell or homes are unusual.</li>
+        <li><strong>Vs. metro</strong> compares an area's typical value with the metro's: +25% means homes there typically cost a quarter more.</li>
+      </ul>
+      <p>The page shows only housing-market measures: values, price changes and estimated payments. It doesn't rate neighborhoods or describe who lives in them.</p>
+
+      <section id="neighborhood-spread">
+        <h3>How prices changed across the metro</h3>
+        <p>This chart counts areas by how much their typical value changed over the past year. A metro that "fell 2%" can include areas that rose 5% and others that fell 8%. A wide spread means the metro figure says little about any one area. A tight spread means most areas moved together.</p>
+      </section>
+
+      <section id="catching-up">
+        <h3>Home value vs. 5-year growth</h3>
+        <p>Each dot is an area: its typical value now, and how much that value changed over five years. If cheaper areas sit higher, they've been growing faster and catching up to the rest of the metro. If pricier areas sit higher, the gap is widening.</p>
+        <p>The <strong>shift vs. metro</strong> column shows the same idea for each area. It's the change over five years in the area's value relative to the metro's. For example, an area that went from 20% below the metro to 10% below shows +10 points. Rapid catch-up often happens in areas going through redevelopment, and past growth doesn't predict future growth.</p>
+      </section>
+
+      <section id="budget">
+        <h3>Using a monthly budget</h3>
+        <p>Enter a monthly budget to see the highest typical home value it covers, and which areas fall within it. We use the same <a href="#payment">payment estimate</a> as the rest of the site: this month's average 30-year rate, your down payment, and optionally 1.5% a year for taxes and insurance.</p>
+        <p>The typical value is for the middle third of homes in an area. Even in an area above your budget, smaller or older homes may fit. And an area within budget will still have homes that don't.</p>
+      </section>
+    </section>
+
+    <section id="comparing">
+      <h2>Comparing metros fairly</h2>
+      <p>The <a href="/compare">Compare</a> page puts up to four metros side by side. A few things help keep the comparison fair:</p>
+      <ul>
+        <li><strong>Compare growth, not just levels.</strong> A $900,000 metro and a $300,000 metro can't share a price chart without the cheaper one looking flat. The <em>home value growth</em> chart sets every metro to 100 at the start of the time range, so 120 means values rose 20% since then, wherever they started.</li>
+        <li><strong>Payments follow prices.</strong> Every metro uses the same national mortgage rate, so differences in monthly payment come from differences in home values (and from local taxes, which our 1.5% estimate doesn't capture).</li>
+        <li><strong>Check which income is used.</strong> Where metro-level income isn't available, the payment-to-income share uses the national median for every metro. Differences between metros then reflect prices alone. The chart says when this applies.</li>
+        <li><strong>Metro boundaries differ.</strong> Some sources report a core division of the largest metros, and metros vary hugely in size. A metro of 20 million people and one of 200,000 aren't the same kind of market.</li>
+        <li><strong>Small metros swing more.</strong> Listing figures for small metros jump around month to month. Look at the trend, not a single month.</li>
+        <li><strong>Use the U.S. as a baseline.</strong> Adding the United States to a comparison shows whether a metro is moving with the country or on its own. Listing and sales measures aren't available nationally.</li>
+      </ul>
+    </section>
+
+    <section id="reading">
+      <h2>Reading any housing data</h2>
+      <ul>
+        <li><strong>Compare with a year earlier.</strong> Housing is seasonal. Compare a month or quarter with the same period a year earlier, not with the previous one.</li>
+        <li><strong>Check the date.</strong> Sources publish on different schedules. Every tile on the dashboard shows its as-of date, and the footer lists how current each source is.</li>
+        <li><strong>Metros are big.</strong> A metro includes cities, suburbs and rural edges that can move in different directions. Your neighborhood may not follow the metro trend.</li>
+        <li><strong>Small markets are noisy.</strong> With few sales, one unusual month can swing the numbers. Look for trends that last several months.</li>
+        <li><strong>Recent figures change.</strong> Several sources revise recent periods as late records arrive.</li>
+      </ul>
+      <p>To see the underlying numbers, go to the <a href="/data">Data page</a>. It shows where each dataset comes from and how we prepared it, and you can download every one.</p>
+    </section>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <section>
+      <h3>Sources</h3>
+      <ul class="sources">
+        <li>Home values: <a href="https://www.zillow.com/research/data/">Zillow Home Value Index (ZHVI)</a>, Zillow Group</li>
+        <li>Listings, sales and days on market: <a href="https://www.redfin.com/news/data-center/">Redfin</a>, a national real estate brokerage</li>
+        <li>Same-home prices: <a href="https://www.fhfa.gov/data/hpi">FHFA House Price Index</a>, Federal Housing Finance Agency</li>
+        <li>Mortgage rates: <a href="https://www.freddiemac.com/pmms">Freddie Mac Primary Mortgage Market Survey</a>, via <a href="https://fred.stlouisfed.org/series/MORTGAGE30US">FRED</a>, Federal Reserve Bank of St. Louis</li>
+        <li>Household income: <a href="https://www.census.gov/">U.S. Census Bureau</a>, via <a href="https://fred.stlouisfed.org/series/MEHOINUSA646N">FRED</a></li>
+      </ul>
+      <p class="note"><a href="/data">See every dataset</a>, how we prepared it and what each column means.</p>
+    </section>
+    <section>
+      <h3>About</h3>
+      <p class="note">Homebuyer Market Lens is an independent project and isn't affiliated with Zillow, Redfin, the FHFA, Freddie Mac or the Census Bureau. Figures are estimates for general information. They aren't financial advice or a loan quote.</p>
+      <p class="note" id="freshness"></p>
+    </section>
+  </div>
+</footer>
+
+<script src="/static/footer.js"></script>
+</body>
+</html>

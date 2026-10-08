@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data · Homebuyer Market Lens</title>
+  <meta name="description" content="The public datasets behind Homebuyer Market Lens: where each comes from, how we prepare it and what each column means.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f9f9f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Homebuyer Market Lens">
+  <meta property="og:title" content="Data · Homebuyer Market Lens">
+  <meta property="og:description" content="The public datasets behind Homebuyer Market Lens: where each comes from and what each column means.">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-row">
+    <div>
+      <h1>Homebuyer Market Lens</h1>
+      <p class="lede">The public data behind every chart: where it comes from, how we prepare it and what it means. For what the measures mean to a buyer, see the <a href="/discussion">Discussion</a>.</p>
+    </div>
+    <nav class="site-nav" aria-label="Pages">
+      <a href="/">Dashboard</a>
+      <a href="/neighborhoods">Neighborhoods</a>
+      <a href="/compare">Compare</a>
+      <a href="/discussion">Discussion</a>
+      <a href="/data" aria-current="page">Data</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="pipeline card" aria-label="How we prepare the data">
+    <ol class="steps">
+      <li><strong>Collect</strong><span>We download the latest public releases from Zillow, Redfin, the FHFA, Freddie Mac and the U.S. Census Bureau.</span></li>
+      <li><strong>Standardize</strong><span>We keep comparable figures from each source and give every metro the same identifier so the sources line up.</span></li>
+      <li><strong>Align</strong><span>Weekly and annual figures are matched to months, so prices, rates and incomes can be compared over time.</span></li>
+      <li><strong>Publish</strong><span>Every chart on this site comes from the datasets below. Browse them or download them as CSV.</span></li>
+    </ol>
+  </section>
+
+  <div class="data-layout">
+    <nav class="table-list" id="table-list" aria-label="Datasets"></nav>
+
+    <article class="table-detail" id="detail" aria-live="polite">
+      <p class="note">Loading datasets…</p>
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <section>
+      <h3>Sources</h3>
+      <ul class="sources">
+        <li>Home values: <a href="https://www.zillow.com/research/data/">Zillow Home Value Index (ZHVI)</a>, Zillow Group</li>
+        <li>Listings, sales and days on market: <a href="https://www.redfin.com/news/data-center/">Redfin</a>, a national real estate brokerage</li>
+        <li>Same-home prices: <a href="https://www.fhfa.gov/data/hpi">FHFA House Price Index</a>, Federal Housing Finance Agency</li>
+        <li>Mortgage rates: <a href="https://www.freddiemac.com/pmms">Freddie Mac Primary Mortgage Market Survey</a>, via <a href="https://fred.stlouisfed.org/series/MORTGAGE30US">FRED</a>, Federal Reserve Bank of St. Louis</li>
+        <li>Household income: <a href="https://www.census.gov/">U.S. Census Bureau</a>, via <a href="https://fred.stlouisfed.org/series/MEHOINUSA646N">FRED</a></li>
+      </ul>
+      <p class="note"><a href="/data">See every dataset</a>, how we prepared it and what each column means.</p>
+    </section>
+    <section>
+      <h3>About</h3>
+      <p class="note">Homebuyer Market Lens is an independent project and isn't affiliated with Zillow, Redfin, the FHFA, Freddie Mac or the Census Bureau. Figures are estimates for general information. They aren't financial advice or a loan quote.</p>
+      <p class="note" id="freshness"></p>
+    </section>
+  </div>
+</footer>
+
+<script src="/static/data.js"></script>
+<script src="/static/footer.js"></script>
+</body>
+</html>

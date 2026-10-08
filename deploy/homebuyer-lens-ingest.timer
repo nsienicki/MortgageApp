@@ -1,0 +1,11 @@
+[Unit]
+Description=Weekly Homebuyer Market Lens data refresh
+
+[Timer]
+# Mondays at 06:00 server time; runs at next boot if the server was off.
+OnCalendar=Mon *-*-* 06:00:00
+RandomizedDelaySec=30min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

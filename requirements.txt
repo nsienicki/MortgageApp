@@ -1,0 +1,5 @@
+# Pinned to the versions the site was built and tested with.
+fastapi==0.128.8
+uvicorn[standard]==0.39.0
+duckdb==1.4.5
+pandas==2.3.3

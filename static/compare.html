@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compare · Homebuyer Market Lens</title>
+  <meta name="description" content="Compare home prices, affordability and competition across up to four U.S. metro areas.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f9f9f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Homebuyer Market Lens">
+  <meta property="og:title" content="Compare metros · Homebuyer Market Lens">
+  <meta property="og:description" content="Compare home prices, affordability and competition across U.S. metro areas.">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-row">
+    <div>
+      <h1>Homebuyer Market Lens</h1>
+      <p class="lede">Compare prices, affordability and competition across up to four metro areas.</p>
+    </div>
+    <nav class="site-nav" aria-label="Pages">
+      <a href="/">Dashboard</a>
+      <a href="/neighborhoods">Neighborhoods</a>
+      <a href="/compare" aria-current="page">Compare</a>
+      <a href="/discussion">Discussion</a>
+      <a href="/data">Data</a>
+    </nav>
+  </div>
+</header>
+
+<div class="filters" role="search">
+  <div class="wrap filter-row">
+    <label class="field metro-field">
+      <span>Add a metro <small id="slots-left"></small></span>
+      <input id="add-input" list="metro-list" autocomplete="off" placeholder="Search a metro, e.g. Austin, TX">
+      <datalist id="metro-list"></datalist>
+    </label>
+    <div class="field">
+      <span id="range-label">Time range</span>
+      <div class="segmented" role="radiogroup" aria-labelledby="range-label">
+        <button type="button" data-range="60" role="radio">5Y</button>
+        <button type="button" data-range="120" role="radio">10Y</button>
+        <button type="button" data-range="0" role="radio">All</button>
+      </div>
+    </div>
+    <label class="field">
+      <span>Down payment</span>
+      <select id="down-input">
+        <option value="0.035">3.5% (FHA)</option>
+        <option value="0.10" selected>10%</option>
+        <option value="0.20">20%</option>
+      </select>
+    </label>
+    <label class="field checkbox">
+      <input type="checkbox" id="taxes-input" checked>
+      <span>Include taxes &amp; insurance<br><small>est. 1.5% of value per year</small></span>
+    </label>
+  </div>
+  <div class="wrap chips" id="chips" aria-label="Metros being compared"></div>
+</div>
+
+<main class="wrap" id="main">
+  <section class="card empty-state" id="empty-state" hidden>
+    <h2>Pick metros to compare</h2>
+    <p class="note">Search above, or start with one of the largest metros. You can add up to four, including the U.S. as a baseline.</p>
+    <div class="suggestions" id="suggestions"></div>
+  </section>
+
+  <div id="compare-content" hidden>
+    <section>
+      <h3 class="section-title">At a glance</h3>
+      <div class="card table-card">
+        <div class="table-wrap glance-wrap">
+          <table class="glance" id="glance"></table>
+        </div>
+      </div>
+      <p class="note">Each figure shows its latest available period; sources update on different schedules. <a href="/discussion#comparing">Comparing metros fairly</a></p>
+    </section>
+
+    <section>
+      <h3 class="section-title">Prices</h3>
+      <div class="grid">
+        <figure class="card" data-chart="c-value">
+          <figcaption><strong>Typical home value</strong><span>Zillow Home Value Index</span><a class="about-link" href="/discussion#home-value">About this measure</a></figcaption>
+          <div class="legend" aria-hidden="true"></div>
+          <div class="plot"><canvas></canvas></div>
+          <details><summary>Data table</summary><div class="table-wrap"></div></details>
+        </figure>
+        <figure class="card" data-chart="c-growth">
+          <figcaption><strong>Home value growth</strong><span>Typical home value, indexed to 100 at the start of the time range</span><a class="about-link" href="/discussion#comparing">About this measure</a></figcaption>
+          <div class="legend" aria-hidden="true"></div>
+          <div class="plot"><canvas></canvas></div>
+          <details><summary>Data table</summary><div class="table-wrap"></div></details>
+        </figure>
+        <figure class="card" data-chart="c-samehome">
+          <figcaption><strong>Same-home price change over the year</strong><span>FHFA repeat-sales index, quarterly</span><a class="about-link" href="/discussion#repeat-sales">About this measure</a></figcaption>
+          <div class="legend" aria-hidden="true"></div>
+          <div class="plot"><canvas></canvas></div>
+          <details><summary>Data table</summary><div class="table-wrap"></div></details>
+        </figure>
+        <figure class="card" data-chart="c-gap">
+          <figcaption><strong>Mix gap by quarter</strong><span>Median price change minus same-home change. Below zero means a cheaper mix of homes sold.</span><a class="about-link" href="/discussion#mix-gap">About this measure</a></figcaption>
+          <div class="legend" aria-hidden="true"></div>
+          <div class="plot"><canvas></canvas></div>
+          <details><summary>Data table</summary><div class="table-wrap"></div></details>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="section-title">Affordability</h3>
+      <div class="grid">
+        <figure class="card" data-chart="c-payment">
+          <figcaption><strong>Monthly payment on the typical home</strong><span id="c-payment-sub">30-year fixed</span><a class="about-link" href="/discussion#payment">About this measure</a></figcaption>
+          <div class="legend" aria-hidden="true"></div>
+          <div class="plot"><canvas></canvas></div>
+          <details><summary>Data table</summary><div class="table-wrap"></div></details>
+        </figure>
+        <figure class="card" data-chart="c-burden">
+          <figcaption><strong>Payment as a share of median income</strong><span id="c-burden-sub">Dashed line: 30% guideline</span><a class="about-link" href="/discussion#burden">About this measure</a></figcaption>
+          <div class="legend" aria-hidden="true"></div>
+          <div class="plot"><canvas></canvas></div>
+          <details><summary>Data table</summary><div class="table-wrap"></div></details>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="section-title">Competition <small>MLS data via Redfin</small></h3>
+      <div class="grid">
+        <figure class="card" data-chart="c-dom">
+          <figcaption><strong>Median days on market</strong><span>Days from listing to accepted offer</span><a class="about-link" href="/discussion#days-on-market">About this measure</a></figcaption>
+          <div class="legend" aria-hidden="true"></div>
+          <div class="plot"><canvas></canvas></div>
+          <details><summary>Data table</summary><div class="table-wrap"></div></details>
+        </figure>
+        <figure class="card" data-chart="c-stl">
+          <figcaption><strong>Sale-to-list price ratio</strong><span>Above 100% means homes sell over asking</span><a class="about-link" href="/discussion#sale-to-list">About this measure</a></figcaption>
+          <div class="legend" aria-hidden="true"></div>
+          <div class="plot"><canvas></canvas></div>
+          <details><summary>Data table</summary><div class="table-wrap"></div></details>
+        </figure>
+        <figure class="card" data-chart="c-supply">
+          <figcaption><strong>Months of supply</strong><span>Months to sell every listing at the current pace. Under 4 favors sellers; over 6 favors buyers.</span><a class="about-link" href="/discussion#inventory">About this measure</a></figcaption>
+          <div class="legend" aria-hidden="true"></div>
+          <div class="plot"><canvas></canvas></div>
+          <details><summary>Data table</summary><div class="table-wrap"></div></details>
+        </figure>
+        <figure class="card" data-chart="c-drops">
+          <figcaption><strong>Listings with a price cut</strong><span>Share of active listings</span><a class="about-link" href="/discussion#price-cuts">About this measure</a></figcaption>
+          <div class="legend" aria-hidden="true"></div>
+          <div class="plot"><canvas></canvas></div>
+          <details><summary>Data table</summary><div class="table-wrap"></div></details>
+        </figure>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <section>
+      <h3>Sources</h3>
+      <ul class="sources">
+        <li>Home values: <a href="https://www.zillow.com/research/data/">Zillow Home Value Index (ZHVI)</a>, Zillow Group</li>
+        <li>Listings, sales and days on market: <a href="https://www.redfin.com/news/data-center/">Redfin</a>, a national real estate brokerage</li>
+        <li>Same-home prices: <a href="https://www.fhfa.gov/data/hpi">FHFA House Price Index</a>, Federal Housing Finance Agency</li>
+        <li>Mortgage rates: <a href="https://www.freddiemac.com/pmms">Freddie Mac Primary Mortgage Market Survey</a>, via <a href="https://fred.stlouisfed.org/series/MORTGAGE30US">FRED</a>, Federal Reserve Bank of St. Louis</li>
+        <li>Household income: <a href="https://www.census.gov/">U.S. Census Bureau</a>, via <a href="https://fred.stlouisfed.org/series/MEHOINUSA646N">FRED</a></li>
+      </ul>
+      <p class="note"><a href="/data">See every dataset</a>, how we prepared it and what each column means.</p>
+    </section>
+    <section>
+      <h3>About</h3>
+      <p class="note">Homebuyer Market Lens is an independent project and isn't affiliated with Zillow, Redfin, the FHFA, Freddie Mac or the Census Bureau. Figures are estimates for general information. They aren't financial advice or a loan quote.</p>
+      <p class="note" id="freshness"></p>
+    </section>
+  </div>
+</footer>
+
+<script src="/static/common.js"></script>
+<script src="/static/compare.js"></script>
+<script src="/static/footer.js"></script>
+</body>
+</html>

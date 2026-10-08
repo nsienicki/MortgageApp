@@ -1,0 +1,21 @@
+[Unit]
+Description=Homebuyer Market Lens data refresh
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=lens
+Group=lens
+WorkingDirectory=/opt/homebuyer-lens/app
+EnvironmentFile=/etc/homebuyer-lens.env
+ExecStart=/opt/homebuyer-lens/venv/bin/python ingest.py
+TimeoutStartSec=2h
+Nice=10
+IOSchedulingClass=idle
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/homebuyer-lens

@@ -1,0 +1,22 @@
+[Unit]
+Description=Homebuyer Market Lens web app
+After=network.target
+
+[Service]
+User=lens
+Group=lens
+WorkingDirectory=/opt/homebuyer-lens/app
+EnvironmentFile=/etc/homebuyer-lens.env
+ExecStart=/opt/homebuyer-lens/venv/bin/uvicorn server:app --host 127.0.0.1 --port 8000 --workers 2 --proxy-headers --forwarded-allow-ips 127.0.0.1 --no-server-header
+Restart=on-failure
+RestartSec=5
+
+# Hardening: the app only reads its code and the database.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/homebuyer-lens
+
+[Install]
+WantedBy=multi-user.target
