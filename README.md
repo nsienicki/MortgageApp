@@ -1,70 +1,101 @@
 # Homebuyer Market Lens
 
-A local website for understanding housing markets through a homebuyer's eyes:
-prices, affordability and competition for every U.S. metro, from free public data.
+See any U.S. housing market the way a homebuyer does: what homes cost, what the monthly payment
+would be, and how competitive buying is. It covers every U.S. metro and the ZIP codes and
+neighborhoods inside them, using only free public data.
 
-## Run it
+## What you can do
+
+- **Dashboard:** prices, affordability and competition for any metro, with a toggle for the down
+  payment and taxes. Includes *"Is it the homes or the mix?"*, which separates real changes in home
+  values from shifts in which kinds of homes happen to be selling.
+- **Neighborhoods:** every ZIP code or neighborhood in a metro: typical values, 1- and 5-year change,
+  10-year trends and estimated payments. Enter a monthly budget to see which areas fit it.
+- **Compare:** up to four metros (or the U.S. as a whole) side by side.
+- **Discussion:** what each measure means, how to read it, and where it falls short.
+- **Data:** browse every underlying table, with its source and column definitions. Filter, sort and
+  download it as CSV.
+
+Every chart has a data table under it, and the site works on phones and in light or dark mode.
+
+## Quick start
+
+Requires Python 3.9 or newer.
 
 ```
+python -m venv .venv
+.venv\Scripts\activate            # Windows
+source .venv/bin/activate         # macOS / Linux
 pip install -r requirements.txt
-python ingest.py     # downloads data (~115 MB) and builds data/housing.duckdb
-python server.py     # http://127.0.0.1:8000
+
+python ingest.py                  # download the public data and build the local database
+python server.py                  # open http://127.0.0.1:8000
 ```
 
-Re-run `python ingest.py` to pick up new data. Downloads newer than 7 days are reused; `--refresh` forces new ones.
+The first `ingest.py` run downloads about 380 MB and builds a database of about 140 MB in `data/`.
+Neither is checked into the repository. Run `ingest.py` again to pick up new data: files less than
+7 days old are reused, and `python ingest.py --refresh` downloads everything again.
 
-### Optional: metro-level income
-By default, the payment-to-income figures use the **national** median household income.
-To use each metro's own income from the Census ACS, get a free key at
-https://api.census.gov/data/key_signup.html and run:
+### Optional: income for each metro (Census API key)
 
-```
-$env:CENSUS_API_KEY = "your-key"   # PowerShell
-python ingest.py
-```
+By default, payment-to-income figures use the **national** median household income for every metro.
+To use each metro's own median income from the Census American Community Survey:
 
-## Hosting
+1. Get a free key at https://api.census.gov/data/key_signup.html.
+2. Set it as an environment variable before running the ingest:
 
-See [`deploy/README.md`](deploy/README.md) for putting the site on an IONOS VPS (Ubuntu, nginx, HTTPS,
-weekly data refresh).
+   ```
+   $env:CENSUS_API_KEY = "your-key"      # Windows PowerShell
+   export CENSUS_API_KEY="your-key"      # macOS / Linux
+   python ingest.py
+   ```
+
+The key is read only from the environment. Don't put it in code or commit it. Census results are
+cached for 30 days, so later runs don't call the API again.
+
+None of the other sources need a key or an account.
 
 ## Data sources
 
 | Data | Source | Frequency |
 |---|---|---|
-| Typical home value (ZHVI) | Zillow Research | Monthly |
-| Sale price, inventory, days on market, sale-to-list, price cuts (MLS-derived) | Redfin Data Center | Monthly, lags ~3 months |
-| 30-year fixed mortgage rate | Freddie Mac PMMS via FRED | Weekly, averaged monthly |
-| Median household income | FRED (national) / Census ACS (metro) | Annual |
-| Home values by price tier, bedrooms and home type | Zillow Research | Monthly |
-| Sales and prices by property type, price per sq ft | Redfin Data Center | Monthly |
+| Typical home value (ZHVI), by metro, ZIP code and neighborhood | Zillow Research | Monthly |
+| Home values by price tier, bedroom count and home type | Zillow Research | Monthly |
+| Sale price, price per sq ft, inventory, days on market, sale-to-list, price cuts | Redfin Data Center (MLS-derived) | Monthly, about 3 months behind |
+| Sales and prices by property type | Redfin Data Center | Monthly |
 | Same-home (repeat-sales) price index | FHFA House Price Index | Quarterly |
-| Home values by ZIP code and neighborhood | Zillow Research | Monthly |
+| 30-year fixed mortgage rate | Freddie Mac PMMS via FRED | Weekly, averaged by month |
+| Median household income | U.S. Census Bureau via FRED (national), Census ACS (metro, optional) | Annual |
 
-Metros are matched across sources by "City, ST" name. For the largest metros,
-Redfin reports the core metro division rather than the full metro.
+Data © Zillow Group; Redfin, a national real estate brokerage; FHFA; Freddie Mac; U.S. Census Bureau.
+Each source's terms of use apply to its data. Metros are matched across sources by their "City, ST"
+name. For the largest metros, Redfin reports the core metro division rather than the full metro.
 
-## Layout
+## How it works
 
-- `ingest.py`: downloads the sources and builds the DuckDB database
-- `server.py`: FastAPI app serving the JSON API (`/api/metros`, `/api/metro/{key}`, `/api/rankings`, `/api/meta`,
-  `/api/tables`, `/api/tables/{name}/rows`, `/api/tables/{name}/csv`) and the site
-- `catalog.py`: label, source, build notes and column descriptions for every database table; shown on the Data page.
-  **Update it whenever you add or change a table in `ingest.py`.**
-- `static/`: the frontend: the dashboard (`index.html`, `app.js`) and the Data page (`data.html`, `data.js`)
+- `ingest.py` downloads each source and loads it into a single local DuckDB database.
+- `server.py` is a small FastAPI app that serves the pages and a JSON API built on that database.
+- `static/` holds the front end: plain HTML, CSS and JavaScript with Chart.js. There is no build step.
+- `catalog.py` describes every table and column; the Data page shows these descriptions.
 
-## Pages
+Affordability math runs in the browser. It assumes a 30-year fixed loan at that month's average rate,
+plus taxes and insurance at 1.5% of the home's value per year.
 
-- **Dashboard** (`/`): prices, affordability and competition for any metro, plus "Is it the homes or the mix?",
-  which separates real value changes from shifts in which homes are selling
-- **Neighborhoods** (`/neighborhoods`): every ZIP code or neighborhood in a metro, with typical values,
-  1- and 5-year change, position relative to the metro, 10-year trends, estimated payments and a monthly-budget filter
-- **Compare** (`/compare`): up to four metros (or the U.S.) side by side, with a summary table and charts
-- **Discussion** (`/discussion`): what each measure means, how to read it, and its limits
-- **Data** (`/data`): browse each DuckDB table with its source, how it was built and what each column means.
-  You can filter, sort, page through and download each table as CSV.
+## Hosting
 
-## Note for this machine
-Norton antivirus intercepts HTTPS, which breaks `pip`'s certificate check. Either
-turn off Norton's "Web/Mail Shield" SSL scanning for Python, or export the Windows trusted
-certificates to a file and pass it with `pip install --cert <file>`. `ingest.py` isn't affected.
+[`deploy/README.md`](deploy/README.md) explains how to run the site on an Ubuntu server with nginx,
+HTTPS and a weekly data refresh.
+
+## Troubleshooting
+
+- **`pip` fails with a certificate error:** antivirus or corporate proxies that scan HTTPS traffic
+  break `pip`'s certificate check. Turn off HTTPS scanning for Python, or export your system's trusted
+  certificates to a file and run `pip install --cert <file> -r requirements.txt`. `ingest.py` isn't
+  affected because it uses the operating system's certificate store.
+- **Port 8000 is already in use:** set a different port with the `PORT` environment variable.
+
+## Disclaimer
+
+Homebuyer Market Lens is an independent project and isn't affiliated with Zillow, Redfin, the FHFA,
+Freddie Mac or the Census Bureau. Figures are estimates for general information. They aren't financial
+advice or a loan quote.

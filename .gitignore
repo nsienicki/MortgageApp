@@ -4,3 +4,4 @@ __pycache__/
 data/
 *.building
 *.part
+CLAUDE.md
